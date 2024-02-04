@@ -612,5 +612,11 @@ export const cryptoData = {
         amount: 5,
         price: 2400,
         date: new Date(),
+    },
+    {
+        id: 'dogecoin',
+        amount: 9000,
+        price: 0.076,
+        date: new Date(),
     }
   ]
