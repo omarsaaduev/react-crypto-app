@@ -1,4 +1,4 @@
-import { Button, DatePicker, Divider, Flex, Form,InputNumber, Result, Select, Space, Typography } from "antd";
+import { Button, DatePicker, Divider, Form,InputNumber, Result, Select, Space } from "antd";
 import { useContext, useRef, useState } from "react";
 import { CryptoContext } from "../context/crypto-context";
 import { useForm } from "antd/es/form/Form";
@@ -15,7 +15,7 @@ const validateMessages = {
 }
 
 export default function AddAssetForm({ onClose }) {
-  const {crypto} = useContext(CryptoContext);
+  const {crypto, addAsset} = useContext(CryptoContext);
   const [coin, setCoin] = useState(null);
   const [form] = Form.useForm();
   const [submitted, setSubmitted] = useState(false);
@@ -75,10 +75,12 @@ export default function AddAssetForm({ onClose }) {
       id: coin.id,
       amount: values.amount,
       price: values.price,
-      date: values.date
+      date: values.date,
     }
-    setSubmitted(true)
     assetRef.current = newAsset;
+    addAsset(newAsset)
+    setSubmitted(true)
+
 
   }
   return (
@@ -96,7 +98,7 @@ export default function AddAssetForm({ onClose }) {
      }}
      initialValues={{
        remember: true,
-       price: +coin.price.toFixed(4),
+       price: +(coin.price - coin.price*(Math.random() * (0.26 - 0.05) + 0.05)).toFixed(4),
      }}
      onFinish={onFinish}
   
